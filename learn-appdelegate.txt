@@ -1,0 +1,51 @@
+# AppDelegate.m/h’s learning
+
+——
+## 简介
++ 是对Application的整个周期进行管理，为整个应用的代理，提供程序的启动推出等监控的接口
++ 每个iOS应用程序都有一个UIApplication，
+	| UIApplocation | UIApplicationDelegate |
+	| ——| — |
+	|加载应用程序的第一个UIView到UIWindow窗体中|UIApplication的代理类，执行其具体功能|
+	|帮助管理应用程序的生命周期|决定如何响应这些事件|
+	|决定如何接受事件|处理应用程序的生命周期事件（比如程序启动和关闭）、系统事件（比如来电、记事项警告）|
+	|系统程序，开发者不更改|开发者主要开发对象之一|
+## AppDelegate的具体方法
+ UIApplicationDelegate接 口提供生命周期函数来处理应用程序以及应用程序的系统事件，这些生命周期函数如下：
+1. application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions:应用程序启动后，要执行的委托调用  
+```
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {}
+```
+	+ **当程序载入后执行，应用程序启动窗口。**只在应用程序启动时执行一次。也就是说在应用程序启动后，要执行的委托调用。application参数用来获取应用程序的状态、变量等，值得注意的是字典参数：(NSDictionary*)launchOptions，该参数存储程序启动的原因。用户直接启动launchOptions内无数据。
+
+2. applicationWillResignActive:(UIApplication *)application:应用程序将要由活动状态切换到非活动状态时执行的委托调用，如按下home 按钮，返回主屏幕，或全屏之间切换应用程序等。
+```
+- (void)applicationWillResignActive:(UIApplication *)application {}
+```
+	+ **当应用程序将要进入非活动状态时执行。**在此期间，应用程序不接收消息或事件，比如来电话了。
+
+3. applicationDidEnterBackground:(UIApplication *)application//在应用程序已进入后台程序时，要执行的委托调用。所以要设置后台继续运行，则在这个函数里面设置即可。  
+```
+- (void)applicationDidEnterBackground:(UIApplication *)application {}
+```
+	+ **当程序被推送到后台的时候调用。**所以要设置后台继续运行，则在这个函数里面设置即可
+
+4. applicationWillEnterForeground:(UIApplication *)application：在应用程序将要进入前台时(被激活)，要执行的委托调用，与applicationWillResignActive 方法相对应。
+```
+- (void)applicationWillEnterForeground:(UIApplication *)application {}
+```
+	+ **当程序从后台将要重新回到前台时候调用。**这个刚好跟上面的那个方法相反。
+
+5、applicationDidBecomeActive:(UIApplication *)application：在应用程序已被激活后，要执行的委托调用，刚好与  applicationDidEnterBackground 方法相对应。
+```
+- (void)applicationDidBecomeActive:(UIApplication *)application {}
+```  
+	+ **当应用程序进入活动状态时执行。**这个刚好跟上面那个方法相反 。
+
+6、applicationWillTerminate:(UIApplication *)application：在应用程序要完全退出的时候，要执行的委托调用。  
+```
+- (void)applicationWillTerminate:(UIApplication *)application {}
+```  
+	+ **当程序将要退出是被调用。**通常是用来保存数据和一些退出前的清理工作。这个需要要设置UIApplicationExitsOnSuspend的键值。
+
+
